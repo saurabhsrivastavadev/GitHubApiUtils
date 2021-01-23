@@ -21,9 +21,11 @@ namespace GitHubApiUtils
         public GitHubRepoRelease ToGitHubRepoRelease()
         {
             return new GitHubRepoRelease(
-                tag_name, name,
-                assets.ConvertAll(a => a.ToGitHubRepoReleaseAsset()),
-                published_at, body);
+                            TagName: tag_name,
+                            Name: name,
+                            Assets: assets.ConvertAll(a => a.ToGitHubRepoReleaseAsset()),
+                            PublishedAt: published_at,
+                            Body: body);
         }
     }
 
@@ -35,7 +37,9 @@ namespace GitHubApiUtils
 
         public GitHubRepoReleaseAsset ToGitHubRepoReleaseAsset()
         {
-            return new GitHubRepoReleaseAsset(created_at, browser_download_url);
+            return new GitHubRepoReleaseAsset(
+                            CreatedAt: created_at,
+                            BrowserDownloadUrl: browser_download_url);
         }
     }
 }
