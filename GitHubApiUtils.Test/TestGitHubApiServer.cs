@@ -21,7 +21,7 @@ namespace GitHubApiUtils.Test
         }
 
         [TestMethod]
-        public async Task TestGetLastestRepoReleaseIsNullForNoReleases()
+        public async Task TestGetLatestRepoReleaseIsNullForNoReleases()
         {
             var api = new GitHubApiServer(new HttpClient());
             var latest = await api.GetLatestRepoRelease("sobu86", "sobu86.github.io");
@@ -44,7 +44,7 @@ namespace GitHubApiUtils.Test
         }
 
         [TestMethod]
-        public async Task TestGetLastestRepoReleaseIsNotNull()
+        public async Task TestGetLatestRepoReleaseIsNotNull()
         {
             var api = new GitHubApiServer(new HttpClient());
             var latest = await api.GetLatestRepoRelease("sobu86", "TempRepoForGitHubApiTest");
@@ -54,7 +54,20 @@ namespace GitHubApiUtils.Test
         }
 
         [TestMethod]
-        public async Task TestGetLastestRepoReleaseIsActuallyLatestInList()
+        public async Task TestGetLatestRepoReleaseFields()
+        {
+            var api = new GitHubApiServer(new HttpClient());
+            var latest = await api.GetLatestRepoRelease("sobu86", "TempRepoForGitHubApiTest");
+
+            // No releases are planned for sobu86.github.io
+            Assert.IsNotNull(latest);
+            Assert.IsTrue(latest.Id != 0);
+            Assert.IsNotNull(latest.TagName);
+            Assert.IsNotNull(latest.PublishedAt);
+        }
+
+        [TestMethod]
+        public async Task TestGetLatestRepoReleaseIsActuallyLatestInList()
         {
             var api = new GitHubApiServer(new HttpClient());
             var latest = await api.GetLatestRepoRelease("sobu86", "TempRepoForGitHubApiTest");
@@ -67,6 +80,22 @@ namespace GitHubApiUtils.Test
             Assert.AreEqual(latestInList, latest.PublishedAt);
 
             Console.WriteLine($"latest release @ {latest.PublishedAt}");
+        }
+
+        /// <summary>
+        /// This test is temporary, it will fail once we make another release without any
+        /// asset.
+        /// </summary>
+        [TestMethod]
+        public async Task TestReleaseAsset()
+        {
+            var api = new GitHubApiServer(new HttpClient());
+            var latest = await api.GetLatestRepoRelease("sobu86", "TempRepoForGitHubApiTest");
+
+            // No releases are planned for sobu86.github.io
+            Assert.IsNotNull(latest.Assets[0].BrowserDownloadUrl);
+
+            Console.WriteLine($"Asset URL - {latest.Assets[0].BrowserDownloadUrl}");
         }
 
         [TestMethod]

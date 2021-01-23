@@ -40,13 +40,13 @@ namespace GitHubApiUtils
     /// Assets will be an empty list if there are no assets.
     /// </summary>
     public record GitHubRepoRelease(
-        string TagName, string Name, List<GitHubRepoReleaseAsset> Assets,
+        int Id, string TagName, string Name, List<GitHubRepoReleaseAsset> Assets,
         DateTime PublishedAt, string Body);
 
     /// <summary>
     /// Record containing relevant details of a Release Asset.
     /// </summary>
     public record GitHubRepoReleaseAsset(
-        DateTime CreatedAt, string BrowserDownloadUrl);
+        int Id, DateTime CreatedAt, string BrowserDownloadUrl);
 }
 

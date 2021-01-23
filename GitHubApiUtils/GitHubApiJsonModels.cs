@@ -8,6 +8,8 @@ namespace GitHubApiUtils
 {
     internal class GitHubRepoReleaseJson
     {
+        public int id { get; set; }
+
         public string tag_name { get; set; }
 
         public string name { get; set; }
@@ -21,6 +23,7 @@ namespace GitHubApiUtils
         public GitHubRepoRelease ToGitHubRepoRelease()
         {
             return new GitHubRepoRelease(
+                            Id: id,
                             TagName: tag_name,
                             Name: name,
                             Assets: assets.ConvertAll(a => a.ToGitHubRepoReleaseAsset()),
@@ -31,6 +34,8 @@ namespace GitHubApiUtils
 
     internal class GitHubRepoReleaseAssetJson
     {
+        public int id { get; set; }
+
         public DateTime created_at { get; set; }
 
         public string browser_download_url { get; set; }
@@ -38,6 +43,7 @@ namespace GitHubApiUtils
         public GitHubRepoReleaseAsset ToGitHubRepoReleaseAsset()
         {
             return new GitHubRepoReleaseAsset(
+                            Id: id,
                             CreatedAt: created_at,
                             BrowserDownloadUrl: browser_download_url);
         }
