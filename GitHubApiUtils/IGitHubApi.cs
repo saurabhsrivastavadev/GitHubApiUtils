@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GitHubApiUtils
 {
@@ -17,9 +18,9 @@ namespace GitHubApiUtils
         /// <param name="repo"></param>
         /// <returns>
         /// List of releases, empty list if there are no releases.
-        /// ArgumentException for invalid owner/repo combination.
+        /// Exception for invalid owner/repo combination.
         /// </returns>
-        List<GitHubRepoRelease> GetRepoReleaseList(string owner, string repo);
+        Task<List<GitHubRepoRelease>> GetRepoReleaseList(string owner, string repo);
 
         /// <summary>
         /// Get the latest release for the specified repo
@@ -29,9 +30,9 @@ namespace GitHubApiUtils
         /// <param name="repo"></param>
         /// <returns>
         /// Latest release, null if there are no releases.
-        /// ArgumentException for invalid owner/repo combination.
+        /// Exception for invalid owner/repo combination.
         /// </returns>
-        GitHubRepoRelease GetLatestRepoRelease(string owner, string repo);
+        Task<GitHubRepoRelease> GetLatestRepoRelease(string owner, string repo);
     }
 
     /// <summary>
