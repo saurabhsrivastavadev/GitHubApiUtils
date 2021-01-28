@@ -14,6 +14,8 @@ namespace GitHubApiUtils
 
         public string name { get; set; }
 
+        public string html_url { get; set; }
+
         public List<GitHubRepoReleaseAssetJson> assets { get; set; }
 
         public DateTime published_at { get; set; }
@@ -26,6 +28,7 @@ namespace GitHubApiUtils
                             Id: id,
                             TagName: tag_name,
                             Name: name,
+                            HtmlUrl: html_url,
                             Assets: assets.ConvertAll(a => a.ToGitHubRepoReleaseAsset()),
                             PublishedAt: published_at,
                             Body: body);
